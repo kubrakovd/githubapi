@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'user_id',
              [
             'attribute' => 'date_created',
-            'format' =>  ['date', 'd.m.Y'],
+            'format' =>  ['date', 'd/M/Y'],
             ],
             'action',
         ],

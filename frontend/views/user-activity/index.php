@@ -8,7 +8,7 @@ use app\models\SearchUserActivity;
 /* @var $searchModel app\models\SearchUserActivity */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'User Activities');
+$this->title = Yii::t('app', 'Activity of users');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-activity-index">
@@ -21,10 +21,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'user_id',
+            // 'user_id',
+            [
+            'attribute' => 'user_id',
+            'options' => ['width' => '15'],
+            ],
             [
             'attribute' => 'date_created',
-            'format' =>  ['date', 'd.m.Y'],
+            'format' =>  ['date', 'd/M/Y'],
+            'options' => ['width' => '40'],
             ],
             'action',
 

@@ -21,6 +21,7 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+     <link rel="icon"  href="../../../frontend/web/favicon.png">
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -28,7 +29,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
+        'brandLabel' => 'Github Api',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -36,15 +37,14 @@ AppAsset::register($this);
     ]);
 
     $menuItems = [
-        // ['label' => 'Home', 'url' => ['/site/index']],
-        // ['label' => 'About', 'url' => ['/site/about']],
-        // ['label' => 'Contact', 'url' => ['/site/contact']],
-        $menuItems[] = ['label' => 'Search user Repository', 'url' => ['/api/index']],
+
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
+        $menuItems[] = ['label' => 'Search user Repository', 'url' => ['/api/index']];
+        $menuItems[] = ['label' => 'Watch users activity', 'url' => ['/user-activity/index']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
@@ -78,7 +78,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; Github Api <?= date('Y') ?> by Denys Kubrakov</p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>

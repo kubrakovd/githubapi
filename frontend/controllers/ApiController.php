@@ -8,27 +8,32 @@ use Yii;
 
 class ApiController extends \yii\web\Controller
 {
+	// Create action index, that will search list of Github repositories
 	 public function actionIndex()
     {
-    	if(isset($_POST['name'])){
-    	$username = $_POST['name'];
-    	$api = new Github\Api;
-    	$response = $api->get('/users/' . $username . '/repos/');
-    	$data = $api->decode($response);
-    	$user_current= Yii::$app->user->identity->username;
-    	$user_activity = new UserActivity;
-    	$user_activity->user_id = Yii::$app->user->id;
-    	$user_activity->date_created = time();
-    	$user_activity->action = $user_current . ' ' . 'search list of the repositories '  .  ' ' . 'of user ' . $username ;
-    	$user_activity->save();
-        return $this->render('index', [
-        		'data'=>$data,
-        	]);
+    	if (Yii::$app->user->isGuest){
+    		echo "You don't have permission to this operation";
     	}else{
-    		 return $this->render('index');
-    	}
+	    	if(isset($_POST['name'])){
+	    	$username = $_POST['name'];
+	    	$api = new Github\Api;
+	    	$response = $api->get('/users/' . $username . '/repos/');
+	    	$data = $api->decode($response);
+	    	$user_current= Yii::$app->user->identity->username;
+	    	$user_activity = new UserActivity;
+	    	$user_activity->user_id = Yii::$app->user->id;
+	    	$user_activity->date_created = time();
+	    	$user_activity->action = $user_current . ' ' . 'search list of the repositories '  .  ' ' . 'of user ' . $username ;
+	    	$user_activity->save();
+	        return $this->render('index', [
+	        		'data'=>$data,
+	        	]);
+	    	}else{
+	    		 return $this->render('index');
+	    	}
+	    }
     }
-
+    // Create action contents, that will shows data of repository
     public function actionContents()
      {
 		$values = [];
@@ -52,9 +57,7 @@ class ApiController extends \yii\web\Controller
     		 return $this->render('contents');
     	}
     }
-
-
-
+	// Create action file, that will shows data of the file
      public function actionFile()
      {
 		$values = [];
@@ -75,12 +78,11 @@ class ApiController extends \yii\web\Controller
         return $this->render('file', [
         		'data'=>$data,
         	]);
-
     	}else{
     		 return $this->render('file');
     	}
     }
-
+	  // Create action file, that will shows data of the folder of repository
       public function actionDir()
      {
 		$values = [];
@@ -101,12 +103,11 @@ class ApiController extends \yii\web\Controller
         return $this->render('dir', [
         		'data'=>$data,
         	]);
-
     	}else{
     		 return $this->render('dir');
     	}
     }
-
+    // Create action file, that will shows data of the folder of the folder.
      public function actionTree()
      {
 		$values = [];
@@ -127,12 +128,10 @@ class ApiController extends \yii\web\Controller
         return $this->render('tree', [
         		'data'=>$data,
         	]);
-
     	}else{
     		 return $this->render('tree');
     	}
     }
 
     public $enableCsrfValidation = false;
-
 }

@@ -3,11 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\ActiveForm;
-// use kartik\widgets\Typeahead;
-// use yii\widgets\LinkPager;
 use yii\helpers\Url;
-// use kartik\widgets\DatePicker;
-// use yii\data\Pagination;
 use yii\filters\VerbFilter;
 
 ?>
@@ -65,40 +61,38 @@ use yii\filters\VerbFilter;
 	$i=1;
 	foreach ($data as $item) {
 		?>
-		 <div class="row">
-		 <div class="col-sm-offset-1 col-sm-1">
-    				<div class="panel panel-success">
-    	        		<div class="panel-heading text-center">
-    	        			<?= $i?>
-    	        		</div>
-    	        	</div>
-            </div>
-            <!-- /.col-sm-2-->
-
-	        <div class="col-sm-4">
-	        	<div class="panel panel-default">
-	        		<div class="panel-heading text-center">
-	        		<?=$item->owner->login ?>
-	        		</div>
-	        	</div>
-	        </div>
-            <!-- /.col-sm-4-->
-            <div class="col-sm-4">
+		<div class="row">
+			<div class="col-sm-offset-1 col-sm-1">
+				<div class="panel panel-success">
+					<div class="panel-heading text-center">
+						<?= $i?>
+					</div>
+				</div>
+			</div>
+			<!-- /.col-sm-offset-1 col-sm-1-->
+			<div class="col-sm-4">
 				<div class="panel panel-default">
-	        		<div class="panel-heading text-center">
-	        		<form  action="<?= Yii::getAlias('@web')?>/api/contents" method="post">
-	        			<input type="hidden" name='<?=$item->owner->login?>'>
-	        			<input type="hidden" name='<?= $item->name?>'>
-	        			<!-- <input type="text" > -->
-	        			<input id="input" title="Click to see content" class="input btn btn-default" type="submit" value="<?=$item->name?>">
-	        		</form>
-	        	</div>
+					<div class="panel-heading text-center">
+						<?=$item->owner->login ?>
+					</div>
+				</div>
+			</div>
+			<!-- /.col-sm-4-->
+			<div class="col-sm-4">
+				<div class="panel panel-default">
+					<div class="panel-heading text-center">
+						<form  action="<?= Yii::getAlias('@web')?>/api/contents" method="post">
+							<input type="hidden" name='<?=$item->owner->login?>'>
+							<input type="hidden" name='<?= $item->name?>'>
+							<input id="input" title="Click to see content" class="input btn btn-default" type="submit" value="<?=$item->name?>">
+						</form>
+					</div>
 
-	        	</div>
-            </div>
-               <!-- /.col-sm-4-->
-                </div>
-        <!-- /.row -->
+				</div>
+			</div>
+			<!-- /.col-sm-4-->
+		</div>
+		<!-- /.row -->
   <?php
   $i++;
 	}
