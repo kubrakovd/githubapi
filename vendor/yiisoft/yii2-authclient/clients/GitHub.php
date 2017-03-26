@@ -104,6 +104,6 @@ class GitHub extends OAuth2
      */
     protected function defaultTitle()
     {
-        return 'GitHub';
+        return 'Signup via GitHub';
     }
 }
